@@ -1,10 +1,13 @@
 var express = require( 'express' );
 var app = express();
+app.use( express.json() );
+app.use( express.urlencoded() );
 
 var EventEmitter = require( 'events' ).EventEmitter;
 var events = new EventEmitter();
 
 app.use( '/client', express.static( __dirname + '/client/' ) );
+app.use( '/server', express.static( __dirname + '/server/' ) );
 
 app.get(
     '/events',
@@ -31,8 +34,8 @@ app.get(
 app.post(
     '/events',
     function( request, response ) {
-        console.log( 'new event' );
-        events.emit( 'message', 'test' );
+        console.log( request.body );
+        events.emit( 'message', request.param( 'message' ) );
         response.send( 'ok' );
     }
 );
