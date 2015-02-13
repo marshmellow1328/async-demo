@@ -1,6 +1,9 @@
 var express = require( 'express' );
 var app = express();
 
+var EventEmitter = require( 'events' ).EventEmitter;
+var events = new EventEmitter();
+
 app.use( '/client', express.static( __dirname + '/client/' ) );
 
 app.get(
@@ -15,10 +18,22 @@ app.get(
             }
         );
         response.write( "\n" );
-        while( true ) {
-            response.write( "event: message\n" );
-            response.write( "data: test\n\n" );
-        }
+        events.on(
+            'message',
+            function( event ) {
+                response.write( "event: message\n" );
+                response.write( "data: "+event+"\n\n" );
+            }
+        );
+    }
+);
+
+app.post(
+    '/events',
+    function( request, response ) {
+        console.log( 'new event' );
+        events.emit( 'message', 'test' );
+        response.send( 'ok' );
     }
 );
 
