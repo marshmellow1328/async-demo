@@ -1,0 +1,16 @@
+{
+  "name": "async-demo-sse",
+  "description": "Demo of Server Sent Events",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "3.5.0",
+    "server-event": "1.0.1"
+  },
+  "devDependencies": {
+    "grunt": "0.4.5",
+    "grunt-contrib-jshint": "0.10.0",
+    "grunt-develop": "0.4.0",
+    "grunt-contrib-watch": "0.6.1"
+  }
+}

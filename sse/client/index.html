@@ -1,0 +1,13 @@
+<html>
+<body>
+    <script type="text/javascript">
+        var events = new EventSource( '/events' );
+        events.addEventListener(
+            'message',
+            function( event ) {
+                console.log( event );
+            }
+        );
+    </script>
+</body>
+</html>
